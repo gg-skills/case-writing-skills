@@ -1,0 +1,8 @@
+{
+  "name": "case-bootstrap",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "render": "node scripts/render-reader-formats.ts"
+  }
+}

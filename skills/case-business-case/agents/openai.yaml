@@ -1,0 +1,16 @@
+interface:
+  display_name: "GG → Case Writing → Business Case"
+  short_description: "Write a sourced case narrative from a ready evidence pack or brief."
+  icon_small: "./assets/icon-small.svg"
+  icon_large: "./assets/icon-large.png"
+  brand_color: '#F59E0B'
+  default_prompt: >-
+    Use this skill to draft the case narrative from a ready evidence pack
+    or the author's traceable manual evidence brief. Open on sourced
+    decision tension and develop the live options; use an outside objection
+    and replies only when documented. No theory or invented speech in the
+    body. Keep the outcome open, write canonical Markdown and HTML/PDF
+    reading copies, list every generated path, and offer to open only
+    the case, PDF first.
+    Then continue into the next skill in the same turn, and end every
+    turn with the harness question tool.

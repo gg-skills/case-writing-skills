@@ -1,0 +1,17 @@
+interface:
+  display_name: "GG → Case Writing → Disguise"
+  short_description: "Adapt or anonymize a case and its note in a separate, audited variant."
+  icon_small: "./assets/icon-small.svg"
+  icon_large: "./assets/icon-large.png"
+  brand_color: '#DC2626'
+  default_prompt: >-
+    Use this skill to adapt or anonymize an existing case, including
+    before a first pilot. Create a separate variant, synchronize its
+    teaching note, preserve the masters, and record changes in an
+    author-only audit trail. Preserve the intended teaching objectives
+    and decision type; document changed analytical results. Keep each
+    Markdown document canonical, also write HTML and PDF, list every
+    generated path, and offer to open only the variant case. Keep audit
+    copies author-only.
+    Then continue into the next skill in the same turn, and end every
+    turn with the harness question tool.

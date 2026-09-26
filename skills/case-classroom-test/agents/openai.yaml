@@ -1,0 +1,16 @@
+interface:
+  display_name: "GG → Case Writing → Classroom Test"
+  short_description: "Pre-flight classroom checks and post-class debrief with audience-fit, AI-move catalogue, timing log, revision brief."
+  icon_small: "./assets/icon-small.svg"
+  icon_large: "./assets/icon-large.png"
+  brand_color: '#EF4444'
+  default_prompt: >-
+    Use this skill in pre-flight mode before the case is used in class,
+    and in real-classroom mode after the case has been used. Pre-flight
+    catches audience-fit problems, complexity calibration, and likely
+    AI-assisted student moves. Real-classroom captures timing, question
+    log, board-plan slippage, and a prioritized revision brief. Keep the
+    report Markdown canonical, also write HTML and PDF, list every
+    generated path, and offer to open only the report.
+    Then continue into the next skill in the same turn, and end every
+    turn with the harness question tool.

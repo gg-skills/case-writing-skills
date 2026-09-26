@@ -1,0 +1,16 @@
+interface:
+  display_name: "GG → Case Writing → Peer Review"
+  short_description: "Simulate blind peer review for journal submission with eight critical checklists and severity tiers."
+  icon_small: "./assets/icon-small.svg"
+  icon_large: "./assets/icon-large.png"
+  brand_color: '#6366F1'
+  default_prompt: >-
+    Use this skill before journal submission. Adopts a reviewer persona
+    (Ivey, Case Centre, HBP, RAE, other) and applies eight critical
+    checklists. Each finding has problem, evidence, suggested fix, and
+    severity (impeditiva / importante / menor). Output is a structured
+    self-assessment, not a real review. Keep the report Markdown canonical,
+    also write HTML and PDF, list every generated path, and offer to
+    open only the report.
+    Then continue into the next skill in the same turn, and end every
+    turn with the harness question tool.

@@ -1,0 +1,18 @@
+interface:
+  display_name: "GG → Case Writing → Research"
+  short_description: "Build a six-file evidence pack from public sources and private transcripts."
+  icon_small: "./assets/icon-small.svg"
+  icon_large: "./assets/icon-large.png"
+  brand_color: '#10B981'
+  default_prompt: >-
+    Use this skill to produce the evidence pack for a business case:
+    timeline, cast, financials, quotes-by-theme, exhibit-candidates,
+    extraction-log. Combines public sources and private transcripts.
+    Uses an existing decision point or a bounded exploratory pass. Keep a
+    decision partial until the applicable readiness gates pass. Mark
+    material, uncorroborated secondary claims [VERIFY] for the author. A
+    missing voice is [MISSING], not a drafted sentence. Keep
+    each Markdown file canonical, also write HTML and PDF, and list the
+    generated paths without offering to open them.
+    Then continue into the next skill in the same turn, and end every
+    turn with the harness question tool.

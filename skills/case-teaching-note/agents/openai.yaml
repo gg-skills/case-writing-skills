@@ -1,0 +1,16 @@
+interface:
+  display_name: "GG → Case Writing → Teaching Note"
+  short_description: "Write the teaching note: learning objectives, theory, 80-minute plan, socratic questions, board plan, rubric."
+  icon_small: "./assets/icon-small.svg"
+  icon_large: "./assets/icon-large.png"
+  brand_color: '#8B5CF6'
+  default_prompt: >-
+    Use this skill to write the teaching note that pairs with a case
+    narrative. Outputs learning objectives, theoretical lenses, a
+    60/80/90/180-minute class plan with socratic questions and board
+    plan, pre/in/post assignments, and a default assessment rubric.
+    Theory lives here, not in the case body. Keep the Markdown canonical,
+    also write the HTML and PDF, list every generated path, and offer to
+    open only the teaching note.
+    Then continue into the next skill in the same turn, and end every
+    turn with the harness question tool.
