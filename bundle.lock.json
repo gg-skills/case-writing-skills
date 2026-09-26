@@ -1,12 +1,12 @@
 {
   "source": "skill-main",
   "skills": {
-    "case-bootstrap": "5ba3c25fd9e8bbf50671f2d4a934bfaff1f7099e",
-    "case-research": "07fc9dcf7a211b3d8d4a1110c0435434a481fa39",
-    "case-business-case": "91d1b35cc12b75a1afdd6205db1fc50617209a4c",
-    "case-teaching-note": "84ae508111ca45dc2af1001c9a72dff149e06ef9",
-    "case-classroom-test": "31f932622e063472d118eb1e4c197d3b2fb786de",
-    "case-peer-review": "f6f4f868cec86eba8cc9313199fdf379342dbf68",
-    "case-disguise": "d37f1ef66169b72673de87a8119632bf3fe5f592"
+    "case-bootstrap": "b687ea3881b33e930e6ffa192c3e8b99ce118a61",
+    "case-research": "1a5f37d501f0609b2a4d97dcea5921f7e982b9c2",
+    "case-business-case": "402d7a9b6ac889e946b0d42c44e4630cf7654524",
+    "case-teaching-note": "31684f4be7600799118d99388e7dfd08e8475ba9",
+    "case-classroom-test": "b2f951c1ef03ffbb80356bd4072de87fb7816762",
+    "case-peer-review": "36a74334ab9c89a5f18c36a4bc662655c0b0216b",
+    "case-disguise": "7cf3f08452033a1b0bc28fb30361e8439523a01f"
   }
 }

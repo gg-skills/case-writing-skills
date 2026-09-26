@@ -4,10 +4,16 @@ Writes the instructor-facing teaching note that pairs with `case.md` from `case-
 
 ## Install
 
-The fastest cross-agent install path is the `skills` CLI:
+Install this skill together with the other six case skills:
 
 ```bash
-npx skills add gg-skills/case-teaching-note
+npx skills add gg-skills/case-writing-skills -y
+```
+
+Install only this skill:
+
+```bash
+npx skills add gg-skills/case-teaching-note -y
 ```
 
 Drop this skill into a workspace as a Git submodule for pinned versions, or as a plain clone for latest `main`:
