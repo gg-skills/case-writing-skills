@@ -1,0 +1,20 @@
+{
+  "name": "gg-case-writing",
+  "plugins": [
+    {
+      "name": "case-writing",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity",
+      "interface": {
+        "displayName": "Case writing"
+      }
+    }
+  ]
+}

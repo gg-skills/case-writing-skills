@@ -1,0 +1,14 @@
+{
+  "name": "gg-case-writing",
+  "description": "Skills para escrever estudos de caso de ensino e notas de ensino.",
+  "owner": {
+    "name": "gg-skills"
+  },
+  "plugins": [
+    {
+      "name": "case-writing",
+      "source": ".",
+      "description": "Abertura, pesquisa, caso, nota de ensino, teste de sala, revisão e variante."
+    }
+  ]
+}

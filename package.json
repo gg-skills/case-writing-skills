@@ -1,0 +1,18 @@
+{
+  "name": "case-writing-skills",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.1.3",
+  "engines": {
+    "node": ">=24.12.0"
+  },
+  "scripts": {
+    "sync": "node --experimental-strip-types scripts/sync-bundle.ts",
+    "package": "node --experimental-strip-types scripts/package-release.ts",
+    "check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^24.12.2",
+    "typescript": "^5.9.3"
+  }
+}
