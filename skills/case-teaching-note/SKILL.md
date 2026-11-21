@@ -40,7 +40,7 @@ note, record a blocked history entry and stop.
    - **Block 3** (20 min): decision moment. Questions that elicit a position and force defense.
    - **Block 4** (20 min): wrap-up + transfer. Questions that connect the case to prior cases or to the student's own experience.
    - Reserve 5 minutes as a buffer in the 80-minute example (75 minutes of activities + 5 buffer). Scale the blocks to the author’s time budget while preserving a short synthesis/transfer segment. Generalization, group work, breaks, or a guest speaker are options, not requirements; see the timed templates.
-6. **Board plan**: a visualizable sequence (a Mermaid `flowchart` or a structured outline) that a colleague can recreate on a whiteboard without notes.
+6. **Board plan**: a visualizable sequence (a Mermaid `flowchart` or a structured outline; see [`references/reader-formats.md`](references/reader-formats.md#diagrams)) that a colleague can recreate on a whiteboard without notes.
 7. **Pre/in/post assignments**: pre-class reading or short writing, in-class group prompts, post-class reflection or follow-up.
 8. **Assessment**: rubric (formative or summative) — pull criteria from `case-classroom-test` if it has run; otherwise default to a 5-criterion rubric (issue identification, framework application, evidence use, position defense, transfer).
 9. **State update**: check applicable `blockers` and read `work_target` before choosing files. Write to its `teaching_note` path for a variant; when that field is `null`, use `variants/<variant-id>/teaching-note.md` and store that path in `work_target`. Use `case-<slug>/teaching-note.md` for the master. Archive a previous root note with its reading copies before replacement. Preserve the active target; set `stage: "case-teaching-note"`, `next_skill: "case-classroom-test"`, and append history in `internal/state.json`.
@@ -66,6 +66,11 @@ same turn. Stop only for a reason listed there. End every turn with the
 harness question tool and options the author can pick, such as "Seguir com
 a pesquisa".
 
+When the run stops after a main deliverable, ask to open it first, alone
+in its own call of the question tool. Ask the next step only after that
+answer, in a separate call, with a "Vou ler primeiro" option (see
+[`references/pipeline-flow.md`](references/pipeline-flow.md#after-a-deliverable)).
+
 ## Inputs
 
 - `case.md` and its evidence pack in `research/` or `research/manual-evidence-brief.md`.
@@ -85,7 +90,7 @@ a pesquisa".
 - Does not submit to a journal (that's `case-peer-review`).
 - Does not produce the participant guide or slide deck (those are downstream of the presentation pipeline).
 - Does not invent theory citations — every reference must come from the evidence pack, manual brief, or the author's uploads.
-- When the note quotes a source, the highlighted quotation is in the language of the note. The verbatim original may follow as `*Original:*`. Follow [`references/reader-formats.md`](references/reader-formats.md). Do not lead with the source language and gloss it afterwards.
+- When the note quotes a source, the highlighted quotation is in the language of the note. Each blockquote ends with its own `— ` line naming the speaker and the source. The verbatim original may follow as `*Original:*`. Follow [`references/reader-formats.md`](references/reader-formats.md). Do not lead with the source language and gloss it afterwards.
 - Does not edit HTML or PDF as sources. Regenerate them from the Markdown.
 
 ## References

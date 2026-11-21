@@ -146,9 +146,11 @@ once, at the end: offer the case when the run wrote or rewrote it, and
 otherwise the main deliverable of the last skill that produced one. Do not
 ask about the intermediate documents.
 
-Ask in the author's language. One question. Open nothing until they
-answer, including in that same turn. If they decline, leave the files in
-place.
+Ask in the author's language. One question, alone in its own call of the
+question tool and before any question about the next step (see
+[`pipeline-flow.md`](pipeline-flow.md#after-a-deliverable)). Open nothing
+until they answer, including in that same turn. If they decline, leave the
+files in place, then ask the next step.
 
 When the running harness has a structured question tool (`ask_user_question`,
 `AskUserQuestion`, or the local equivalent), use it for this choice. Pass
@@ -160,7 +162,8 @@ tool's own recommended marker). Do not recommend HTML or Markdown unless
 the author has said they prefer that format. If the harness has no such
 tool, ask the same choice in one short message and name PDF as the
 recommendation. Do not list other pending work or
-other documents as options in that question.
+other documents as options in that question, and do not add a second
+question to the same call.
 
 After they choose a format, open only the main deliverable in it:
 
@@ -188,9 +191,23 @@ audit.
 
 ```markdown
 > "Ninguém garante o resultado do lançamento, e uma continuação precisa superar o original."
+>
+> — Marina Alves, produtora, em entrevista a uma revista do setor, junho de 2009
 
 *Original:* "No one can guarantee the launch, and a sequel has to outperform the original."
 ```
+
+Every blockquote names its speaker on its own last line, inside the
+quotation, opening with `— `: the name, the role at the time, and the
+occasion or source with its date, as far as the evidence gives them. Do
+this even when the sentence before already names the speaker, and repeat
+it on each quotation when several follow in a row: a reader who skims, or
+lands after a rule or a page break, must see who said it. Two passages
+from the same speaker on the same occasion can share one blockquote and
+one attribution line. A disguised or anonymized document uses the
+disguised name or the role only. The renderer sets that line apart,
+aligned to the right. A short quotation inside a paragraph names the
+speaker in the same sentence.
 
 The blockquote is the citation the reader meets. `*Original:*` is the
 verbatim source. `*No original:*` is the same line when the document uses
@@ -207,10 +224,14 @@ adds no fact the source does not state.
 the source wording. They are working documents. The evidence pack stays
 verbatim so the case can translate from it.
 
-## Limits
+## Diagrams
 
-The PDF is printed with headless Chrome or Chromium. Pass `--chrome PATH`
-or set `CASE_WRITING_CHROME` when the browser is not in a standard location.
+Any reader-facing document may carry diagrams: the case, the teaching
+note, a report, or a variant. Use one when it is the clearest way to show
+the information, such as a timeline, a structure, or a flow; otherwise
+use a table or prose. What a diagram may show in each document is in that
+skill's own instructions.
+
 A fenced ` ```mermaid ` block is drawn as a diagram: the renderer runs
 Mermaid once in the same browser and stores the result in the HTML as an
 inline SVG, so the HTML and the PDF show it without a script or a
@@ -224,4 +245,9 @@ source text in the HTML and PDF: fix its Mermaid syntax and render again.
 When Mermaid cannot be loaded at all, report that the diagrams stay as
 source text. Do not describe a document as ready while one of its
 diagrams is shown as code.
+
+## Limits
+
+The PDF is printed with headless Chrome or Chromium. Pass `--chrome PATH`
+or set `CASE_WRITING_CHROME` when the browser is not in a standard location.
 Relative links and images in the Markdown are preserved.

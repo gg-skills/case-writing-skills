@@ -87,6 +87,11 @@ same turn. Stop only for a reason listed there. End every turn with the
 harness question tool and options the author can pick, such as "Seguir com
 a pesquisa".
 
+When the run stops after a main deliverable, ask to open it first, alone
+in its own call of the question tool. Ask the next step only after that
+answer, in a separate call, with a "Vou ler primeiro" option (see
+[`references/pipeline-flow.md`](references/pipeline-flow.md#after-a-deliverable)).
+
 ## Inputs
 
 - `case.md` and `teaching-note.md`.

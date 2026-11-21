@@ -1,0 +1,1 @@
+A ruled note represents the instructor's preparation for teaching a case.

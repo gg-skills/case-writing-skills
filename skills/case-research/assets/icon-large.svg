@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" role="img" aria-label="Research a Case">
+  <defs>
+    <linearGradient id="case-research-gradient-160" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop stop-color="#10B981"/>
+      <stop offset="1" stop-color="#12AD7E"/>
+    </linearGradient>
+  </defs>
+  <rect width="160" height="160" fill="#FFF"/>
+  <rect width="160" height="160" rx="30" fill="url(#case-research-gradient-160)"/>
+  <g transform="scale(2.5)">
+    <path d="M24 22l8 20 8-20" fill="none" stroke="#FFF" stroke-width="2"/>
+    <circle cx="24" cy="22" r="5" fill="#FFF"/>
+    <circle cx="40" cy="22" r="5" fill="#FFF"/>
+    <circle cx="32" cy="42" r="5" fill="#FFF"/>
+  </g>
+</svg>

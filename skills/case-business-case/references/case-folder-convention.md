@@ -61,8 +61,8 @@ cover:
 ```
 
 Exhibits that are figures (charts, photos) live in `assets/` and
-are referenced with relative paths. Tables can live inline in the
-Markdown. When this skill replaces an existing `case.md`, move the previous
+are referenced with relative paths. Tables and Mermaid diagrams can live
+inline in the Markdown; the renderer draws a `mermaid` block as a figure. When this skill replaces an existing `case.md`, move the previous
 case, its HTML and PDF, and `assets/` into `archive/<yyyy-mm-dd-hhmm>/` first.
 
 ## State transition

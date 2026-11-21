@@ -49,10 +49,12 @@ lenses, prior case exposure, or AI tool access in class.
 - Use what the author already said. Otherwise use the skill's default and
   state it in the document, such as "Nível assumido: pós-graduação".
 - Do not stop to ask a preference before the first version.
-- After the document is written, offer to adjust those choices. When the
-  question tool accepts several questions in one call, ask the adjustment
-  as its own question, with multiple selection. Otherwise add the most
-  useful adjustments as options of the end-of-run question.
+- After the document is written and the opening question is answered,
+  offer to adjust those choices in the next-step question (see
+  [After a deliverable](#after-a-deliverable)). When the question tool
+  accepts several questions in one call, the adjustment may be its own
+  question in that call, with multiple selection; never in the same call
+  as the opening question.
 - When the author picks an adjustment, ask that one fact, then revise the
   document.
 
@@ -84,8 +86,10 @@ straight to the teaching note.
 1. List the paths the run generated.
 2. List the gaps in a few short lines: what is missing, and how closing
    it would improve the case.
-3. Ask one question with the harness question tool. The options, in this
-   order:
+3. Ask to open the case, alone, as
+   [After a deliverable](#after-a-deliverable) says. End the turn there.
+4. After the author answers and the chosen file is open, ask the next
+   step with the harness question tool. The options, in this order:
    - "Seguir com a nota de ensino" (recommended): continue the chain with
      the case as it is.
    - "Pesquisar outras fontes para as lacunas": run `case-research` again
@@ -93,16 +97,37 @@ straight to the teaching note.
    - "Vou enviar informações ou material": the author adds an interview,
      a document, or a fact; store it as a source and revise the case.
    - "Revisar o caso": the author says what to change in the case.
-
-   When the question tool accepts more than one question in a call, add a
-   second question that offers to open the case, as
-   [`reader-formats.md`](reader-formats.md#opening) says. Otherwise, the
-   gap question comes first and the paths are already listed.
+   - "Vou ler o caso primeiro": do nothing now; the author reads the case
+     and comes back with feedback.
 
 Stop before the case only when the decision itself cannot be told without
 a missing fact. Then ask with the options "Seguir sem essa informação"
 (recommended, when the case can still be written with the gap stated),
 "Pesquisar em outras fontes", and "Vou fornecer a informação".
+
+## After a deliverable
+
+When the run stops right after writing a main deliverable (see
+[`reader-formats.md`](reader-formats.md#opening)), ask two questions, in
+two separate calls of the question tool, in this order:
+
+1. **Open the document.** The opening question from
+   [`reader-formats.md`](reader-formats.md#opening), and nothing else in
+   that call: no next step, no adjustment, no second question. End the
+   turn and wait for the answer.
+2. **Next step.** Only after the author has answered the first question,
+   and after the chosen file is open, ask what comes next, with the
+   options for the situation (see
+   [Every turn ends with a question](#every-turn-ends-with-a-question)).
+
+The author has waited for this document and may want to read it before
+deciding anything. Include a "do nothing for now" option in the
+next-step question, such as "Vou ler primeiro" or "Parar aqui por
+enquanto". When the author picks it, stop without further work and say
+in one line that the run resumes from `next_skill` when they come back.
+
+A turn that continues the chain without stopping does not ask either
+question; the paths are listed and the chain goes on.
 
 ## When to stop
 
@@ -132,15 +157,18 @@ options the author can pick to act, with the most likely one first:
 - **Stopped before the chain is done**: the first option continues, such as
   "Seguir com a pesquisa". Add the real alternatives, such as "Revisar os
   dados do caso" or "Parar aqui".
-- **Gaps after the case**: the options in
-  [Gaps in the evidence](#gaps-in-the-evidence).
-- **The chain is complete**: the question from
-  [`reader-formats.md`](reader-formats.md#opening) that offers to open the
-  main deliverable, plus the adjustments from
+- **Gaps after the case**: first the opening question, then the options
+  in [Gaps in the evidence](#gaps-in-the-evidence), as two separate
+  calls (see [After a deliverable](#after-a-deliverable)).
+- **The chain is complete**: first the opening question from
+  [`reader-formats.md`](reader-formats.md#opening) for the main
+  deliverable, alone. After the answer, a second question with the
+  adjustments from
   [Defaults first, customize after](#defaults-first-customize-after), such
-  as "Ajustar nível ou posição na ementa" or "Mudar a duração da aula". It
-  may add optional next steps, such as "Criar uma variante" or "Preparar a
-  revisão para um journal".
+  as "Ajustar nível ou posição na ementa" or "Mudar a duração da aula",
+  optional next steps, such as "Criar uma variante" or "Preparar a
+  revisão para um journal", and "Vou ler primeiro".
 
 When the harness has no question tool, end with one short question and
-its numbered options.
+its numbered options. After a deliverable, that is still the opening
+question alone; the next-step question comes in the following turn.

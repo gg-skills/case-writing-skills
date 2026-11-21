@@ -49,11 +49,12 @@ this output. Resolve `work_target` before selecting the case file.
 6. **Quality gates** (all of them; details in the two references above):
    - Case body cites no theory, framework, or author — those belong in the teaching note.
    - All numerical claims trace to the evidence pack or manual brief, with a source ID and page or section. When a material fact changed before the decision, use the later sourced value and show its date and source.
-   - Every direct quotation the reader sees is in the language of the case. It translates a verbatim sentence in the evidence pack or manual brief, and it adds no fact that sentence does not state. When the source language differs, the verbatim sentence may follow as `*Original:*`. Do not lead with the foreign-language sentence and gloss it afterwards. Indirect speech is allowed only when the source itself states the position. A decision-relevant voice with no primary words is `[MISSING]`, not a drafted sentence.
+   - Every direct quotation the reader sees is in the language of the case. It translates a verbatim sentence in the evidence pack or manual brief, and it adds no fact that sentence does not state. Each blockquote ends with its own `— ` line naming the speaker, the role, and the source with its date, even when the lead-in names the speaker ([`references/reader-formats.md`](references/reader-formats.md#quotations-the-reader-sees)). When the source language differs, the verbatim sentence may follow as `*Original:*`. Do not lead with the foreign-language sentence and gloss it afterwards. Indirect speech is allowed only when the source itself states the position. A decision-relevant voice with no primary words is `[MISSING]`, not a drafted sentence.
    - The opening has a sourced tension, protagonist, stakes, and live options. If using an outside objection, responses come from sources; their absence calls for a different opening or more research, not invented replies.
    - A multi-business comparison gives each relevant business the context students need; the five beats are a guide, not a quota.
    - The ending preserves the decision with sourced arguments for the live options and does not tell the historical outcome.
    - For a quantitative economic choice, at least one exhibit lets students calculate the consequences with printed inputs. If the necessary inputs are missing, send the case back to research. For a qualitative choice, use decision-relevant evidence without invented numbers.
+   - When a timeline, a structure, or a flow is clearest as a picture, write that exhibit as a Mermaid diagram of sourced facts, not a framework. See [`references/hybrid-form.md`](references/hybrid-form.md#diagram-exhibits).
    - When the evidence describes families, clusters, or a system and that structure affects the choice, the case uses it. A headcount is not a strategy.
    - A named operating head appears when that person and business matter to the decision and sources support the line on how it makes money. People who never speak about the decision stay out of the narrative.
 7. **Update `internal/state.json`**: check applicable `blockers` before drafting. When the quality gates pass, write the case to `case-<slug>/case.md`, or to `work_target.case` for a variant. Figures live beside that case in `assets/`. Archive a previous root case and its reading copies before replacement. Set `stage: "case-business-case"`, `next_skill: "case-teaching-note"`, and append history. When a gate fails, keep the last successful stage and record the gap.
@@ -84,12 +85,17 @@ same turn. Stop only for a reason listed there. End every turn with the
 harness question tool and options the author can pick, such as "Seguir com
 a pesquisa".
 
+When the run stops after a main deliverable, ask to open it first, alone
+in its own call of the question tool. Ask the next step only after that
+answer, in a separate call, with a "Vou ler primeiro" option (see
+[`references/pipeline-flow.md`](references/pipeline-flow.md#after-a-deliverable)).
+
 When the case is written and gaps remain — `[MISSING]` voices, open
-`[VERIFY]` claims, sources not retrieved — present the case with its gaps
-and ask with the options in
+`[VERIFY]` claims, sources not retrieved — present the case with its gaps,
+ask to open it, and only after that answer ask with the options in
 [`references/pipeline-flow.md`](references/pipeline-flow.md#gaps-in-the-evidence):
-continue to the teaching note, research the gaps, add information, or
-revise the case. With no gap, continue to the teaching note.
+continue to the teaching note, research the gaps, add information, revise
+the case, or read it first. With no gap, continue to the teaching note.
 
 ## Inputs
 

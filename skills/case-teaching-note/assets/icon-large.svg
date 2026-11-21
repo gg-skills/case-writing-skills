@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" role="img" aria-label="Write a Teaching Note">
+  <defs>
+    <linearGradient id="case-teaching-note-gradient-160" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop stop-color="#8B5CF6"/>
+      <stop offset="1" stop-color="#8357E9"/>
+    </linearGradient>
+  </defs>
+  <rect width="160" height="160" fill="#FFF"/>
+  <rect width="160" height="160" rx="30" fill="url(#case-teaching-note-gradient-160)"/>
+  <g transform="scale(2.5)">
+    <path d="M22 14h20v36H22zm6 8h8m-8 6h8m-8 6h8" fill="none" stroke="#FFF" stroke-width="2"/>
+  </g>
+</svg>

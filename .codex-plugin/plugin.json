@@ -1,6 +1,6 @@
 {
   "name": "case-writing",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Sete skills para escrever um estudo de caso de ensino e a sua nota: abertura, pesquisa, caso, nota, teste de sala, revisão e variante.",
   "interface": {
     "displayName": "Case writing"

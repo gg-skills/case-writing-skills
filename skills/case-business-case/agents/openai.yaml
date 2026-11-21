@@ -13,4 +13,5 @@ interface:
     reading copies, list every generated path, and offer to open only
     the case, PDF first.
     Then continue into the next skill in the same turn, and end every
-    turn with the harness question tool.
+    turn with the harness question tool. After a main deliverable, ask
+    to open it alone first, and the next step in a separate question.

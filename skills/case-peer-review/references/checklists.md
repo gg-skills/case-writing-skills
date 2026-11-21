@@ -19,7 +19,7 @@ severity.
 ## 3. Source verifiability
 
 - **Trigger**: every case.
-- **Look for**: are all claims traceable to a source? Are page numbers given? Are URLs working? Are interview transcripts cited by ID? A highlighted quotation in the document language is sourced when the verbatim sentence is on the following `*Original:*` line, in the evidence pack, or in the author-only audit. Flag a translation that adds a fact the source does not state. Do not require the foreign-language sentence to occupy the highlighted quotation.
+- **Look for**: are all claims traceable to a source? Are page numbers given? Are URLs working? Are interview transcripts cited by ID? A highlighted quotation in the document language is sourced when the verbatim sentence is on the following `*Original:*` line, in the evidence pack, or in the author-only audit. Flag a translation that adds a fact the source does not state. Flag a blockquote with no `— ` attribution line of its own, even when the speaker is named in the text above it. Do not require the foreign-language sentence to occupy the highlighted quotation.
 - **Example finding**: `severity: importante` — "Exhibit 3 cites a 'recent McKinsey report' without a year or URL. Either cite the specific report or remove the claim."
 
 ## 4. Measurable learning objectives

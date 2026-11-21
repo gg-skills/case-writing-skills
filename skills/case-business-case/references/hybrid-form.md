@@ -106,6 +106,32 @@ The scene example is a register sample, not a license to invent a scene.
 - Each exhibit (table, figure) answers a question the protagonist is asking at that moment.
 - Exhibits are referenced inline as `![Exhibit N — description (source)](assets/exhibit-N.png)` once assets are extracted; until then, reference them as `see Exhibit N below`. Write the label in the case language from [`taxonomy.md`](taxonomy.md): in Portuguese, `![Anexo N — descrição (fonte)](assets/exhibit-N.png)`, "ver Anexo N", and an "Anexos" section. The file name stays in English.
 - Includes a calculable exhibit for a quantitative choice. Filing tables may sit in an appendix.
+- A diagram exhibit is a fenced `mermaid` block when structure or sequence is the point (see [Diagram exhibits](#diagram-exhibits)).
+
+## Diagram exhibits
+
+Use a diagram in the case when it is the clearest way to show sourced
+information, and a table or prose when those are clearer. Good fits:
+
+- a timeline of events up to the decision date (`timeline`);
+- an ownership, deal, or organization structure (`flowchart`);
+- a process, supply chain, or flow of money or rights between parties
+  (`flowchart`);
+- a sourced series or share that students read at a glance
+  (`xychart-beta`, `pie`), with the exact values also in a table when
+  students must calculate with them.
+
+Write it as a fenced `mermaid` block in `case.md`, under an exhibit
+heading in the case language ("Anexo N. <título>" in Portuguese), with its
+source line below the block. The renderer draws it as a figure in the HTML
+and PDF (see [`reader-formats.md`](reader-formats.md#diagrams)).
+
+A case diagram shows facts, not analysis. Every node, date, and value
+comes from the evidence pack, and nothing after the decision date appears.
+Analytical frameworks — a five forces map, a SWOT, a decision tree with
+the answer, a board plan — belong in the teaching note, not in the case.
+Do not add a diagram only for decoration, and do not draw one when it
+would simplify or distort the evidence.
 
 ## Optional Part C — Decision Moment
 
@@ -166,9 +192,18 @@ sentence may follow on the next line:
 
 ```markdown
 > "Ninguém garante o resultado do lançamento, e uma continuação precisa superar o original."
+>
+> — Marina Alves, produtora, em entrevista a uma revista do setor, junho de 2009
 
 *Original:* "No one can guarantee the launch, and a sequel has to outperform the original."
 ```
+
+Each blockquote ends with its own attribution line: `— ` followed by the
+speaker, the role at the time, and the source or occasion with its date,
+taken from `research/quotes-by-theme.md`. Keep it even when the lead-in
+sentence names the speaker, and on every quotation of a run from the same
+person. Never leave a blockquote whose speaker the reader must find in the
+text above it.
 
 Omit `*Original:*` when the source is already in the case language, or
 when the author asks to leave the source sentence off the page. A short

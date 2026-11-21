@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" role="img" aria-label="Adapt a Case">
+  <defs>
+    <linearGradient id="case-disguise-gradient-160" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop stop-color="#DC2626"/>
+      <stop offset="1" stop-color="#CE252A"/>
+    </linearGradient>
+  </defs>
+  <rect width="160" height="160" fill="#FFF"/>
+  <rect width="160" height="160" rx="30" fill="url(#case-disguise-gradient-160)"/>
+  <g transform="scale(2.5)">
+    <g fill="none" stroke="#FFF" stroke-width="3">
+      <circle cx="32" cy="32" r="14"/>
+      <path d="M22 32h20m-10-10v20"/>
+    </g>
+  </g>
+</svg>

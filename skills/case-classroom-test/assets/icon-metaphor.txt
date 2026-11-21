@@ -1,0 +1,1 @@
+A circled alert represents issues to catch while testing a case in class.

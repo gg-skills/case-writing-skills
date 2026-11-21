@@ -78,6 +78,8 @@ p, ul, ol, blockquote, pre, table { margin: 0.8rem 0; }
 ul, ol { padding-left: 1.4rem; }
 blockquote { margin: 1rem 0 0.35rem; padding: 0.85rem 1.05rem; background: #f3efe6; border-left: 3px solid #8c2f2f; color: #1c1915; }
 blockquote p { margin: 0; }
+blockquote p + p { margin-top: 0.5rem; }
+blockquote p.attribution { margin-top: 0.45rem; text-align: right; color: #5c564c; font-size: 0.9rem; }
 p.source-original { margin-top: 0.15rem; color: #5c564c; font-size: 0.95rem; }
 code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.9em; }
 pre { background: #f6f6f6; padding: 0.8rem 1rem; overflow: auto; }
@@ -375,7 +377,7 @@ function renderBlocks(lines: string[], titleFallback: string): { title: string; 
         quoted.push((lines[index] ?? '').replace(/^ {0,3}>\s?/, ''));
         index += 1;
       }
-      html.push(`<blockquote>\n${renderBlocks(quoted, titleFallback).body}\n</blockquote>`);
+      html.push(`<blockquote>\n${markAttribution(renderBlocks(quoted, titleFallback).body)}\n</blockquote>`);
       continue;
     }
     const paragraph: string[] = [];
@@ -524,6 +526,13 @@ function itemBody(text: string): string {
   if (!box?.[1] || box[2] === undefined) return inline(text);
   const checked = box[1].toLowerCase() === 'x' ? ' checked' : '';
   return `<input type="checkbox" disabled${checked}> ${inline(box[2])}`;
+}
+
+// The last paragraph of a quotation that opens with a dash names who spoke.
+function markAttribution(body: string): string {
+  const start = body.lastIndexOf('<p>');
+  if (start <= 0 || !/^<p>(?:—|–|--)\s/.test(body.slice(start))) return body;
+  return `${body.slice(0, start)}<p class="attribution">${body.slice(start + 3)}`;
 }
 
 function isSourceOriginal(lines: string[]): boolean {
