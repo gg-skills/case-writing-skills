@@ -2,7 +2,7 @@
 
 Sete skills que conduzem um estudo de caso de ensino, da abertura até a variante. O mesmo texto serve aos agentes de código que leem `SKILL.md` e aos produtos que aceitam esse arquivo por upload.
 
-Este repositório é o pacote instalável. O material da palestra e o acervo ficam em outro repositório, `gaspargiacomini/case-writing`.
+Este repositório é o pacote instalável. O material da palestra e o acervo ficam em um repositório separado.
 
 | Skill | Quando entra |
 | --- | --- |
