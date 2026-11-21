@@ -1,13 +1,11 @@
 #!/usr/bin/env -S node --experimental-strip-types
 
 /**
- * Copies each case skill from the tip of its main branch into skills/.
- * Records those commits in bundle.lock.json. Does not follow submodules.
+ * Refreshes the public skills tree from a local maintainer configuration.
  */
 
-import { execFileSync } from "node:child_process";
-import { cp, mkdir, rm, writeFile } from "node:fs/promises";
-import { tmpdir } from "node:os";
+import { spawnSync } from "node:child_process";
+import { mkdir, readFile, rename, rm, rmdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const SKILLS = [
@@ -20,79 +18,131 @@ const SKILLS = [
   "case-disguise",
 ] as const;
 
-const help = `Refresh skills/ from the main branch of each gg-skills case repository.
+const PUBLIC_BUNDLE = "gg-skills/case-writing-skills";
+const LOCAL_CONFIG = "bundle.sources.local.json";
+const INSTALL_SECTION = /^## Install\r?\n[\s\S]*?(?=^## )/m;
+
+const help = `Refresh skills/ using a local source mapping (see bundle.sources.example.json).
 
 Usage: ./scripts/sync-bundle.ts [--help]
 
 Options:
-  --help, -h   Show this help and exit. Does not read or write the bundle.
+  --help, -h            Show this help and exit without reading or writing files.
+  CASE_BUNDLE_SOURCES   Path to a source mapping. Defaults to bundle.sources.local.json.
 
 Effects:
-  For each skill, reads refs/heads/main, clones that commit, and replaces
-  skills/<name>/ with those files. Writes bundle.lock.json. Removes a skill
-  directory that is no longer in the list above. Does not push.
-
-Example:
-  ./scripts/sync-bundle.ts
+  Fetches each configured Git ref and stages all seven skills. Rewrites their
+  install instructions for the public bundle, then replaces skills/. Does not push.
 `;
 
-type LockFile = {
-  source: "skill-main";
-  skills: Record<string, string>;
-};
+type Source = { repository: string; ref: string };
 
-const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const root = path.resolve(import.meta.dirname, "..");
 
-function fail(message: string): never {
-  console.error(message);
-  process.exit(1);
-}
+async function loadSources(): Promise<Map<string, Source>> {
+  const configPath = process.env.CASE_BUNDLE_SOURCES
+    ? path.resolve(process.env.CASE_BUNDLE_SOURCES)
+    : path.join(root, LOCAL_CONFIG);
 
-function run(command: string, args: string[], cwd?: string): string {
-  return execFileSync(command, args, {
-    cwd,
-    encoding: "utf8",
-    stdio: ["ignore", "pipe", "pipe"],
-  }).trim();
-}
-
-function mainSha(name: string): string {
-  const remote = `git@github.com:gg-skills/${name}.git`;
-  const line = run("git", ["ls-remote", remote, "refs/heads/main"]);
-  const sha = line.split(/\s+/)[0] ?? "";
-  if (!/^[0-9a-f]{40}$/.test(sha)) {
-    fail(`Could not read main for ${name}: ${line || "(empty)"}`);
-  }
-  return sha;
-}
-
-async function copySkill(name: string, sha: string, scratch: string): Promise<void> {
-  const remote = `git@github.com:gg-skills/${name}.git`;
-  const clone = path.join(scratch, name);
-  run("git", ["clone", "--depth", "1", remote, clone]);
-  const head = run("git", ["rev-parse", "HEAD"], clone);
-  if (head !== sha) {
-    fail(`${name} moved while syncing. Expected ${sha}, cloned ${head}. Run the sync again.`);
-  }
-  const destination = path.join(root, "skills", name);
-  await rm(destination, { recursive: true, force: true });
-  await mkdir(path.dirname(destination), { recursive: true });
-  await cp(clone, destination, {
-    recursive: true,
-    filter: (source) => {
-      const relative = path.relative(clone, source);
-      if (relative === "") return true;
-      return relative.split(path.sep)[0] !== ".git";
-    },
+  const contents = await readFile(configPath, "utf8").catch(() => {
+    throw new Error(`Cannot read source mapping. Create ${LOCAL_CONFIG} from bundle.sources.example.json or set CASE_BUNDLE_SOURCES.`);
   });
-  const sourceNote = {
-    repository: `gg-skills/${name}`,
-    sha,
-  };
-  await writeFile(
-    path.join(destination, ".bundle-source.json"),
-    `${JSON.stringify(sourceNote, null, 2)}\n`,
+  let config: Record<string, Partial<Source> | undefined>;
+  try {
+    config = JSON.parse(contents);
+  } catch {
+    throw new Error("The source mapping must be valid JSON.");
+  }
+  if (!config || typeof config !== "object" || Array.isArray(config)) {
+    throw new Error("The source mapping must be a JSON object keyed by skill.");
+  }
+
+  const sources = new Map<string, Source>();
+  for (const name of SKILLS) {
+    const source = config[name];
+    if (typeof source?.repository !== "string" || !source.repository.trim()
+      || typeof source.ref !== "string" || !source.ref.trim()) {
+      throw new Error(`Configure a repository and Git ref for ${name}.`);
+    }
+    const repository = source.repository.includes(":")
+      ? source.repository
+      : path.resolve(path.dirname(configPath), source.repository);
+    sources.set(name, { repository, ref: source.ref });
+  }
+  return sources;
+}
+
+function git(cwd: string, args: string[], failure: string, expectedStatus = 0): void {
+  const result = spawnSync("git", args, { cwd, stdio: ["ignore", "pipe", "pipe"] });
+  if (result.status !== expectedStatus) throw new Error(failure);
+}
+
+async function stageSkill(name: string, source: Source, staging: string): Promise<void> {
+  const destination = path.join(staging, name);
+  await mkdir(destination);
+  git(destination, ["-c", "init.templateDir=", "init"], `Could not initialize Git for ${name}.`);
+  git(
+    destination,
+    ["fetch", "--depth=1", "--no-tags", "--", source.repository, source.ref],
+    `Could not fetch ${name}. Check access to the configured repository and ref.`,
   );
+  git(destination, ["checkout", "--detach", "FETCH_HEAD"], `Could not check out ${name}.`);
+
+  await readFile(path.join(destination, "SKILL.md"));
+  const readmePath = path.join(destination, "README.md");
+  const readme = await readFile(readmePath, "utf8");
+  if (!INSTALL_SECTION.test(readme)) throw new Error(`Could not find the install section for ${name}.`);
+
+  const installSection = [
+    "## Install",
+    "",
+    "Install this skill together with the other six case skills.",
+    "",
+    "```bash",
+    `npx skills add ${PUBLIC_BUNDLE} -y`,
+    "```",
+    "",
+    "To install only this skill, use its name.",
+    "",
+    "```bash",
+    `npx skills add ${PUBLIC_BUNDLE} --skill ${name} -y`,
+    "```",
+    "",
+    "Restart your agent or reload skills after installation. Browse public skills on the [GG Skills organization profile](https://github.com/gg-skills).",
+    "",
+    "",
+  ].join("\n");
+  await writeFile(readmePath, readme.replace(INSTALL_SECTION, installSection));
+
+  const owner = PUBLIC_BUNDLE.split("/")[0];
+  const sourceReference = `(${owner}|github[.]com[:/][[:alnum:]_.-]+)(/|%2f)(${SKILLS.join("|")})([^[:alnum:]_-]|$)`;
+  const commitPin = "(^|[^[:xdigit:]])[[:xdigit:]]{40}([^[:xdigit:]]|$)";
+  git(
+    destination,
+    ["grep", "-IqiE", "-e", sourceReference, "-e", commitPin, "--"],
+    `Could not verify public content for ${name}. Review it for repository references or commit pins.`,
+    1,
+  );
+  await rm(path.join(destination, ".git"), { recursive: true });
+}
+
+async function publishSkills(staging: string, backup: string): Promise<void> {
+  const destination = path.join(root, "skills");
+  const hasBackup = await rename(destination, backup).then(() => true).catch((error: NodeJS.ErrnoException) => {
+    if (error.code === "ENOENT") return false;
+    throw error;
+  });
+  try {
+    await rename(staging, destination);
+  } catch (error) {
+    if (hasBackup) {
+      await rename(backup, destination).catch(() => {
+        throw new Error("Could not restore skills/. Recover the previous tree from .bundle-sync/previous-skills.");
+      });
+    }
+    throw error;
+  }
+  if (hasBackup) await rm(backup, { recursive: true });
 }
 
 async function main(): Promise<void> {
@@ -101,31 +151,29 @@ async function main(): Promise<void> {
     console.log(help);
     return;
   }
-  if (args.length > 0) {
-    console.error(`Unknown argument: ${args[0] ?? ""}`);
-    console.log(help);
-    process.exit(1);
-  }
+  if (args.length > 0) throw new Error(`Unknown argument: ${args[0]}`);
 
-  const lock: LockFile = { source: "skill-main", skills: {} };
-  const scratch = path.join(tmpdir(), `case-writing-skills-${Date.now().toString()}`);
-  await mkdir(scratch, { recursive: true });
+  const sources = await loadSources();
+  const scratch = path.join(root, ".bundle-sync");
+  await mkdir(scratch).catch((error: NodeJS.ErrnoException) => {
+    if (error.code === "EEXIST") throw new Error("A sync is running or left work in .bundle-sync/.");
+    throw error;
+  });
+  const staging = path.join(scratch, "staged-skills");
   try {
-    for (const name of SKILLS) {
-      const sha = mainSha(name);
-      await copySkill(name, sha, scratch);
-      lock.skills[name] = sha;
-      console.log(`${name} ${sha}`);
-    }
+    await mkdir(staging);
+    for (const [name, source] of sources) await stageSkill(name, source, staging);
+    await publishSkills(staging, path.join(scratch, "previous-skills"));
   } finally {
-    await rm(scratch, { recursive: true, force: true });
+    await rm(staging, { recursive: true, force: true });
+    await rmdir(scratch).catch((error: NodeJS.ErrnoException) => {
+      if (error.code !== "ENOTEMPTY") throw error;
+    });
   }
-
-  await writeFile(path.join(root, "bundle.lock.json"), `${JSON.stringify(lock, null, 2)}\n`);
-  console.log(`Wrote ${SKILLS.length.toString()} skills into skills/.`);
+  console.log(`Wrote ${SKILLS.length} skills into skills/.`);
 }
 
 main().catch((error: unknown) => {
-  const message = error instanceof Error ? error.message : String(error);
-  fail(message);
+  console.error(error instanceof Error ? error.message : String(error));
+  process.exitCode = 1;
 });

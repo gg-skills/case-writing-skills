@@ -4,31 +4,16 @@ Writes the instructor-facing teaching note that pairs with `case.md` from `case-
 
 ## Install
 
-Install this skill together with the other six case skills:
+Install this skill together with the other six case skills.
 
 ```bash
 npx skills add gg-skills/case-writing-skills -y
 ```
 
-Install only this skill:
+To install only this skill, use its name.
 
 ```bash
-npx skills add gg-skills/case-teaching-note -y
-```
-
-Drop this skill into a workspace as a Git submodule for pinned versions, or as a plain clone for latest `main`:
-
-```bash
-# Project-local, version-pinned:
-git submodule add git@github.com:gg-skills/case-teaching-note.git .claude/skills/case-teaching-note
-
-# OR project-local, latest main:
-mkdir -p .claude/skills
-git -C .claude/skills clone git@github.com:gg-skills/case-teaching-note.git
-
-# OR user-level, available in every project on this machine:
-mkdir -p ~/.claude/skills
-git -C ~/.claude/skills clone git@github.com:gg-skills/case-teaching-note.git
+npx skills add gg-skills/case-writing-skills --skill case-teaching-note -y
 ```
 
 Restart your agent or reload skills after installation. Browse public skills on the [GG Skills organization profile](https://github.com/gg-skills).

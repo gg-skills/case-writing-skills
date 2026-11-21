@@ -4,31 +4,16 @@ Creates a separate variant of an existing case and, when one exists, its teachin
 
 ## Install
 
-Install this skill together with the other six case skills:
+Install this skill together with the other six case skills.
 
 ```bash
 npx skills add gg-skills/case-writing-skills -y
 ```
 
-Install only this skill:
+To install only this skill, use its name.
 
 ```bash
-npx skills add gg-skills/case-disguise -y
-```
-
-Drop this skill into a workspace as a Git submodule for pinned versions, or as a plain clone for latest `main`:
-
-```bash
-# Project-local, version-pinned:
-git submodule add git@github.com:gg-skills/case-disguise.git .claude/skills/case-disguise
-
-# OR project-local, latest main:
-mkdir -p .claude/skills
-git -C .claude/skills clone git@github.com:gg-skills/case-disguise.git
-
-# OR user-level, available in every project on this machine:
-mkdir -p ~/.claude/skills
-git -C ~/.claude/skills clone git@github.com:gg-skills/case-disguise.git
+npx skills add gg-skills/case-writing-skills --skill case-disguise -y
 ```
 
 Restart your agent or reload skills after installation. Browse public skills on the [GG Skills organization profile](https://github.com/gg-skills).

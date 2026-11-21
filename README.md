@@ -14,8 +14,6 @@ Este repositório é o pacote instalável. O material da palestra e o acervo fic
 | `case-peer-review` | Revisa o caso e a nota para um periódico |
 | `case-disguise` | Produz uma variante para reuso, adaptação ou anonimização |
 
-O pacote acompanha o `main` de cada repositório `gg-skills/case-*` no momento da sincronização. O projeto Case Writing pode continuar fixado num commit anterior.
-
 ## Instalar num agente de código
 
 É preciso Node.js 18 ou mais recente para o comando abaixo. O repositório é público.
@@ -89,7 +87,9 @@ As skills escrevem HTML e PDF com Node.js 24.12 ou mais recente, pnpm e o Google
 
 ## Atualizar o pacote
 
-Num clone deste repositório, com acesso de leitura aos repositórios `gg-skills/case-*`:
+Use Node.js 24.12 ou mais recente, pnpm, Git e `zip` no clone do pacote.
+
+Para configurar a sincronização, copie `bundle.sources.example.json` para `bundle.sources.local.json`. Para cada skill, preencha `repository` com a URL do repositório de origem ou o caminho de um checkout local. Caminhos relativos partem da pasta do arquivo JSON. Em `ref`, use uma referência como `refs/heads/main` para atualizar pela ponta do branch ou o ID completo de um commit para reproduzir uma versão. Mantenha o mapeamento real em local privado. O Git ignora `bundle.sources.local.json`. Use a variável `CASE_BUNDLE_SOURCES` para indicar um arquivo em outro local.
 
 ```sh
 pnpm install
@@ -98,6 +98,4 @@ pnpm run check
 pnpm run package
 ```
 
-`sync` substitui `skills/` pela ponta do `main` de cada skill e reescreve `bundle.lock.json`. `package` gera `dist/*.zip`. Publique o commit e um release com esses zips. A ajuda de cada script sai com `--help` e não altera arquivos.
-
-Cada pasta em `skills/<nome>/` traz `.bundle-source.json` com o repositório e o commit copiados. A edição continua no repositório da skill, não nesta cópia.
+`sync` busca as sete referências, prepara as instruções de instalação públicas e substitui `skills/` depois de validar o conteúdo. Revise o diff antes de publicar. `package` gera `dist/*.zip` a partir das cópias em `skills/` e dos manifestos do plugin. Para ver a ajuda de um script, passe `--help`.
